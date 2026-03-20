@@ -28,4 +28,7 @@ rich==14.2.0
 sqlparse==0.5.4
 tzdata==2025.2
 urllib3==2.5.0
-pip install dj-database-url psycopg2-binary gunicorn whitenoise
+dj-database-url==0.5.0
+psycopg2-binary==2.9.9
+gunicorn==21.2.0
+whitenoise==6.7.0
