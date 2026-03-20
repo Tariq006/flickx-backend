@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: flickx-backend
+    env: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate
+    startCommand: gunicorn lms_api.wsgi:application
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: flickx-db
+          property: connectionString
+      - key: FRONTEND_URL
+        value: https://flickx-front-mxqigzms6-ifeoluwa-s-projects-8c5ad3c3.vercel.app
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+
+databases:
+  - name: flickx-db
+    plan: free
